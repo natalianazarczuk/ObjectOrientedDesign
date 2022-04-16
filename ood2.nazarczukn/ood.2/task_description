@@ -1,0 +1,49 @@
+                          ━━━━━━━━━━━━━━━━━━━
+                           DUMMY FILE SYSTEM
+                          ━━━━━━━━━━━━━━━━━━━
+
+
+1 The task
+══════════
+
+  Implement two ways of iterating over a dummy filesystem and use it to
+  print all the directories and files:
+  • Breadth First Search (BFS) order -
+    <https://en.wikipedia.org/wiki/Breadth-first_search>
+  • Depth First Search (DFS) order -
+    <https://en.wikipedia.org/wiki/Depth-first_search>
+
+  Iterate over the provided dummy filesystem, strating from root, first
+  in BFS and then in DFS order. When iterating, print each node's name
+  and, if available, content.
+
+  Make sure that your solution to iterating over the filesystem is:
+  • extensible in terms of adding new ways of iteration
+  • in client code it's possible and easy to stop iteration in one way,
+    move to other way and then get back to iterating the first way
+
+  When iterating the filesystem in DFS order, add transformations to
+  nodes' content and/or name and only print transformed name/content:
+  1. Before each name print '|' and N times '-', where N is the depth of
+     the file in the filesystem (number of parents until null is
+     reached). This feature should be implemented as a transformation.
+  2. If node is not a directory, apply a transformation to its content
+     which removes all hyphens ('-').
+  3. If node is not a directory and its name doesn't end with ".cipher",
+     append newline character to its content ('\n').
+  4. If node's name ends with ".cipher", in addition to all previous
+     transformations, apply two more:
+     ⁃ Reverse its content (character-wise, e.g. "asd" becomes "dsa")
+     ⁃ Subtract 25 from each character in its content (cast char to
+       int), e.g. 'z' - 25 = 'a'.
+
+  Make sure that your implementation of transformations allows to easily
+  add new transformations and to freely compose different
+  transformations in any way for each node.
+
+  You are *not* allowed to:
+  • modify IFileSystemNode
+  • modify DummyDirectory
+  • modify DummyFile
+  • modify existing DummyNode code (but you are allowed to add new
+    functionality)
