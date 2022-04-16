@@ -1,0 +1,90 @@
+Tower defence
+
+##############################
+Game
+
+We will simulate one round in simplified tower defence game. 
+We have two baze classes: Enemies and Defenders. Enemies will go along the line of defenders
+and each defender tries to attack every living opponent that passes next to him exactly once.   
+
+
+##############################
+Enemies
+
+There is an abstract Enemy class that forms the basis of all enemies. Every enemy has:
+
+- Name;
+- Alive - information if it is alive;
+- HP - the number of "health points" if it drops to zero, it dies.
+
+There are 3 specific types of enemies:
+
+- Giant; has no special properties
+- Ogre; has an additional "armor" parameter. Every time an ogre has to lose X health points 
+  it loses X-armor (but always at least 1 point).
+- Rat; It has an additional "speed" parameter. With every loss
+  health points, the rat panics, increasing its speed by 1.
+
+
+##############################
+Defenders
+
+Each defender has a Name parameter.
+
+There are 5 types of defenders:
+
+- Warrior - The most basic of the defenders. He damages every enemy by amount of his "strength"
+  parameter. Hes chance to miss his attack against Rat based on speed of rat. Miss chance
+  formula:
+  if (rng.NextDouble () <rat.speed / 100) {...}
+- Archer - A subclass of the Warrior class. He only has a certain number of arrows.
+  He uses 1 arrow for each attack. When he attacks a giant, he shoots him twice.
+- Mage - attacks enemies by casting spells on them. It takes a certain amount of energy to
+  cast a spell. When he can't cast a spell on his opponent, he regenerates energy 
+  instead of attacking him.
+  Has additional parameters:
+  - Mana - information about the amount of magical energy he has stored;
+  - SpellPower - information on how many health points it takes from the enemy, it is equal
+    to amount of mana spent on casting a spell;
+  - ManaRegen - information on how much energy is regenerated when unable to cast spells.
+- FireMage - A wizard specializing in fire magic. His spells have an extra chance of
+  killing an enemy immediately. Instant kill formula:
+  if (rng.NextDouble () < killChanse) {...}
+- RatCatcher - the most specialized of defenders. If he meets a rat, he catches and
+  kills it and keeps its body. When he has a rat's body and meets an ogre, he throws
+  that body on ogre. Ogre is terryfied and runs away (which can be simulated by killing
+  an ogre immediately).
+  When a ratcatcher has a rat's body, it ignores anything that is not an ogre.
+
+##############################
+Main
+
+Main contains code for creating opponents and enemies, and an attack simulation.
+
+##############################
+Task
+
+1. Complete the implementation of the defender classes as described above.
+   Use control prints (Console.WriteLine) when defender tries to attack
+   opponent. The control printouts should include the name of the defender
+   and the result of the action taken.
+2. Complete the Attack method in Program.cs.
+
+Your solution should allow for easy creation of new defenders (IDefender). It should be possible
+to add a new defender without modifying existing classes. Adding a new type of enemy may require
+modifying existing classes.
+
+Make sure to get acquainted with the provided code and take advantage of already implemented fields
+and methods.
+
+##############################
+You are allowed to:
+
+- Add new fields and methods to existing classes/interfaces;
+- Add new classes (although it is not required to solve the task).
+
+##############################
+You are NOT allowed to:
+
+- Change access modifiers (public, protected, private) of existing fields/properties/methods;
+- Use explicit type checking with if, switch etc.
